@@ -1,11 +1,10 @@
-@'
 name: Build and Deploy .NET Application
 
 on:
   push:
     branches:
       - main
-      - master
+      - master # tu repositorio local usa "master"; deja ambas ramas
 
 jobs:
   build:
@@ -29,9 +28,8 @@ jobs:
     - name: Publish application
       run: dotnet publish Lab10_ChambiLizbeth/Lab10_ChambiLizbeth.csproj --configuration Release --no-build --output ./published
 
-    - name: Upload published app (despliegue de ejemplo)
+    - name: Deploy (sube los archivos publicados como artefacto)
       uses: actions/upload-artifact@v4
       with:
         name: published-app
         path: ./published
-'@ | Set-Content -Encoding utf8 .github\workflows\dotnet.yml
