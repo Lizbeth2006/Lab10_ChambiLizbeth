@@ -1,0 +1,37 @@
+@'
+name: Build and Deploy .NET Application
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore Lab10_ChambiLizbeth.sln
+
+    - name: Build application
+      run: dotnet build Lab10_ChambiLizbeth.sln --configuration Release --no-restore
+
+    - name: Publish application
+      run: dotnet publish Lab10_ChambiLizbeth/Lab10_ChambiLizbeth.csproj --configuration Release --no-build --output ./published
+
+    - name: Upload published app (despliegue de ejemplo)
+      uses: actions/upload-artifact@v4
+      with:
+        name: published-app
+        path: ./published
+'@ | Set-Content -Encoding utf8 .github\workflows\dotnet.yml
