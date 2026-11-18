@@ -1,0 +1,6 @@
+@Lab10_ChambiLizbeth_HostAddress = http://localhost:5086
+
+GET {{Lab10_ChambiLizbeth_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
